@@ -8,7 +8,7 @@
     :show-toolbar="showToolbar"
     :src="src"
     :width="width"
-    :on-error="onError"
+    @error="onError($event)"
   />
 </template>
 
@@ -28,7 +28,6 @@ interface Props {
   showToolbar?: boolean
   src?: string
   width?: string | number
-  onError?: (e: Event) => void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -39,7 +38,14 @@ const props = withDefaults(defineProps<Props>(), {
   previewSrc: undefined,
   showToolbar: true,
   src: undefined,
-  width: undefined,
-  onError: undefined
+  width: undefined
 })
+
+const eimt = defineEmits<{
+  (e: 'error', event: Event): void
+}>()
+
+const onError = (event: Event) => {
+  eimt('error', event)
+}
 </script>

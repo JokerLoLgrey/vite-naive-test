@@ -1,15 +1,22 @@
 <template>
   <div class="myLayoutLogo">
-    <div class="myLayoutLogoContent">
-      <my-image
-        class="myLayoutLogoContentLogoImage"
-        width="40"
-        src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
-      />
-      <my-gradient-text class="myLayoutLogoContentLogoName" v-show="showName">
-        蓉e行
-      </my-gradient-text>
-    </div>
+    <my-space class="myLayoutLogoContent" justify="center" align="center">
+      <div class="myLayoutLogoContentImage">
+        <my-image
+          v-if="logo.image"
+          :src="logo.image.src"
+          :width="logo.image.width"
+          :height="logo.image.height"
+          :objectFit="logo.image.objectFit"
+        />
+      </div>
+      <!-- <my-gradient-text class="myLayoutLogoContentLogoName" v-show="showName">
+        {{ logo.gradient && logo.gradient.text ? logo.gradient.text : '' }}
+      </my-gradient-text> -->
+      <div class="myLayoutLogoContentName" v-if="showName">
+        {{ logo.text && logo.text.value ? logo.text.value : '' }}
+      </div>
+    </my-space>
   </div>
 </template>
 
@@ -20,42 +27,50 @@ export default {
 </script>
 
 <script lang="ts" setup>
+interface ILogo {
+  image?: {
+    [attr: string]: any
+  }
+  gradient?: {
+    [attr: string]: any
+  }
+  text?: {
+    [attr: string]: any
+  }
+}
+
 interface Props {
   style?: object
   showName?: boolean
+  logo?: ILogo
 }
 
 const props = withDefaults(defineProps<Props>(), {
   style: () => {
     return {}
   },
-  showName: true
+  showName: true,
+  logo: () => {
+    return {}
+  }
 })
 </script>
 
 <style lang="scss" scoped>
-@mixin flex($jc: center, $ai: center) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-}
 .myLayoutLogo {
-  @include flex;
   width: 100%;
-  height: calc(var(--header-height) - 1px);
-  padding: 0 var(--side-padding);
+  height: var(--header-height);
+  box-sizing: border-box;
+  padding: 0 10px;
   box-sizing: border-box;
   &Content {
-    @include flex;
     height: 100%;
-    &Logo {
-      &Image {
-        font-size: 0;
-      }
-      &Name {
-        margin-left: 10px;
-        color: black;
-      }
+    &Image {
+      font-size: 0;
+    }
+    &Name {
+      font-size: 16px;
+      line-height: 30px;
     }
   }
 }

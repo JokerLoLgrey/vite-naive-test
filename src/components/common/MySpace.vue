@@ -8,7 +8,9 @@
     :vertical="vertical"
     :wrap="wrap"
   >
-    <slot name="default" />
+    <template #default>
+      <slot name="default" />
+    </template>
   </n-space>
 </template>
 
@@ -38,4 +40,6 @@ const props = withDefaults(defineProps<Props>(), {
   vertical: false,
   wrap: true
 })
+
+console.log(props.itemStyle)
 </script>

@@ -10,7 +10,7 @@
 import { ref, Ref } from 'vue'
 import { darkTheme } from 'naive-ui'
 
-const theme: Ref<null> = ref(null)
+const theme: Ref<any> = ref(null)
 </script>
 
 <style>

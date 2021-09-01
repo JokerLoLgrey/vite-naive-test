@@ -1,7 +1,7 @@
 const components = import.meta.globEager('./*.vue')
 
 interface ILayoutComponentsObj {
-  [attr:string]:any
+  [attr: string]: any
 }
 
 const layoutComponentsObj: ILayoutComponentsObj = {}

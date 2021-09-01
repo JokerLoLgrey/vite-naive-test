@@ -1,5 +1,5 @@
 <template>
-  <n-icon :color="color" :depth="depth" size="40">
+  <n-icon :color="color" :depth="depth" :size="size">
     <slot name="default" />
   </n-icon>
 </template>
@@ -20,6 +20,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   color: undefined,
   depth: undefined,
-  size: undefined
+  size: 40
 })
 </script>
